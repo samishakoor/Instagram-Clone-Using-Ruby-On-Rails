@@ -1,0 +1,136 @@
+
+body::before{
+  content: '';
+  position: absolute;
+  width: 100%;
+
+  clip-path: inset(47% 0 0 0);
+  z-index: -1;
+  height: 100%;
+}
+::selection{
+  background:	#FF676D;
+  color: #fff;
+}
+.container{
+  max-width: 950px;
+  width: 100%;
+  overflow: hidden;
+  padding: 0px 0;
+}
+.container .main-card{
+
+  width: 195%;
+  transition: all 1s ease;
+}
+
+.container .main-card .cards{
+  width: calc(100% / 2 - 10px);
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 20px;
+  justify-content: space-evenly;
+}
+.main-card .cards .card{
+  width: calc(100% / 3 - 10px);
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  transition: all 0.4s ease;
+}
+.main-card .cards .card:hover{
+  transform: translateY(-15px);
+}
+.cards .card .content{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.cards .card .content .img{
+  height: 190px;
+  width: 245px;
+  padding: 3px;
+  margin-bottom: 14px;
+}
+.card .content .img img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.card .content .name{
+  font-size: 20px;
+  font-weight: 500;
+}
+.card .content .job{
+  font-size: 20px;
+  color: #FF676D;
+}
+.card .content .media-icons{
+  margin-top: 10px;
+  display: flex;
+
+}
+.media-icons a{
+  text-align: center;
+  line-height: 33px;
+  height: 35px;
+  width: 35px;
+  margin: 0 4px;
+  font-size: 14px;
+  color: #FFF;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: #FF676D;
+  transition: all 0.3s ease;
+}
+.media-icons a:hover{
+  color: #FF676D;
+  background-color: #fff;
+  border-color: #FF676D;
+}
+
+
+@media (max-width: 768px) {
+  .main-card .cards .card{
+    margin: 20px 0 10px 0;
+    width: calc(100% / 2 - 10px);
+  }
+}
+@media (max-width: 600px) {
+  .main-card .cards .card{
+    /* margin: 20px 0 10px 0; */
+    width: 100%;
+  }
+}
+
+
+.story-link
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  left: 0;
+  z-index: 4;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.story-link:hover
+{
+  opacity: 0.5;
+}
+
+
+
+
+
+
+
+
+
+
+

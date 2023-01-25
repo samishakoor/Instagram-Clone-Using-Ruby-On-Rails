@@ -1,0 +1,27 @@
+<br>
+<br>
+<br>
+
+<h1>Search Results:</h1>
+<hr>
+<br>
+
+<div class="left-align">
+  <% c=0%>
+  <% @users.each do |user|%>
+
+  <%if user.id!=current_user.id%>
+     <%c=c+1%>
+     <h5><%=c%>.  <%=link_to  user.email ,user, style:"z-index:" ,class:"link-dark"%></h5>
+  <%end%>
+
+  <br>
+  <% end %>
+</div>
+
+<br>
+<div class="text-center"></div>
+<% if !@users[0].present? %>
+  <h2>Sorry , No Users found !!!</h2>
+<% end %>
+</div>

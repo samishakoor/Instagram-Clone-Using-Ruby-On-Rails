@@ -1,0 +1,68 @@
+.post-link
+{
+  position: absolute;
+  width: 100%;
+  height: 22.5%;
+
+  top: 0;
+  left: 0;
+  z-index: 4;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.post-link:hover
+{
+  opacity: 0.3;
+}
+
+.post-link2
+{
+  position: absolute;
+  width: 100%;
+  height: 16%;
+
+  top: 0;
+  left: 0;
+  z-index: 4;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.post-link2:hover
+{
+  opacity: 0.3;
+}
+
+
+hr.style2 {
+	border-top: 3px double black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

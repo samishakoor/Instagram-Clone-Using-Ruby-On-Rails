@@ -1,0 +1,111 @@
+  <section class="bg-light" style="padding-top: 75px;padding-bottom: 9px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-4 mb-sm-5" style="margin-bottom: 0px ; margin-top: 0px;">
+                <div class="card card-style1 border-0">
+                    <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                <% if @user.avatar.attached? %>
+                                  <%= image_tag @user.avatar, style:"width: 45%; height:10%;" %>
+                                <%else%>
+                                  <%="No Profile Photo Attatched!"%>
+                                <% end %>
+                              </div>
+                            <div class="col-lg-6 px-xl-10" style="padding-left: 0‒;">
+                                <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                    <h3 class="h2 text-white mb-0">User Profile</h3>
+                                </div>
+
+                                <ul class="list-unstyled mb-1-9">
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Username:</span><%= @user.username %></li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span><%= @user.email %></li>
+                                    <%= render 'partials/check_profile_type'%>
+                                    <%if !@user.bio.empty?%>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Bio:</span> <%=@user.bio%></li>
+                                    <%end%>
+                                    <br>
+                                    <%if @user.id===current_user.id%>
+                                    <%= link_to "Edit Profile" , edit_user_registration_path,:class => 'btn btn-secondary btn-lg'%>
+                                    <%end%>
+                                    <%= render 'partials/follow_unfollow_button'%>
+                                </ul>
+
+
+
+                                <%if @user.id===current_user.id%>
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <span class="display-26 text-secondary me-2 font-weight-800 "><b>Followers  </b><span class="badge bg-dark badge-pill"><%=current_user.followers.count%></span></span></a>
+                                <div class="dropdown-menu">
+                                    <%if !current_user.followers.empty?%>
+                                    <% current_user.followers.each do |follower| %>
+                                    <li class="list-group-item list-group" style="width: 18rem;"><b><%= link_to follower.email, follower ,class:"link-dark"%></b></li>
+                                    <% end %>
+                                    <%else%>
+                                    <%="No Followers yet !"%>
+                                    <%end%>
+                                </div>
+                                <br>
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false"> <span class="display-26 text-secondary me-2 font-weight-800 "><b>Following  </b><span class="badge bg-dark badge-pill"><%=current_user.following.count%></span></span></a>
+                                <div class="dropdown-menu" >
+                                    <%if !current_user.following.empty?%>
+                                    <% current_user.following.each do |following| %>
+                                    <li class="list-group-item list-group" style="width: 18rem;"><b><%= link_to following.email, following,class:"link-dark" %></b></li>
+                                    <% end %>
+                                    <%else%>
+                                    <%="No Following yet !"%>
+                                    <%end%>
+                                </div>
+                                <%end%>
+
+
+
+                                <%if current_user.following?(@user)%>
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <span class="display-26 text-secondary me-2 font-weight-800 "><b>Followers  </b><span class="badge bg-dark badge-pill"><%=@user.followers.count%></span></span></a>
+                                <div class="dropdown-menu" >
+                                    <%if !@user.followers.empty?%>
+                                    <% @user.followers.each do |follower| %>
+                                    <li class="list-group-item list-group" style="width: 18rem;"><b><%= link_to follower.email, follower ,class:"link-dark"%></b></li>
+                                    <% end %>
+                                    <%else%>
+                                    <%="No Followers yet !"%>
+                                    <%end%>
+                                </div>
+                                <br>
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false"> <span class="display-26 text-secondary me-2 font-weight-800 "><b>Following  </b><span class="badge bg-dark badge-pill"><%=@user.following.count%></span></span></a>
+                                <div class="dropdown-menu" >
+                                    <%if !@user.following.empty?%>
+                                    <% @user.following.each do |following| %>
+                                    <li class="list-group-item list-group" style="width: 18rem;"><b><%= link_to following.email, following,class:"link-dark" %></b></li>
+                                    <% end %>
+                                    <%else%>
+                                    <%="No Following yet !"%>
+                                    <%end%>
+                                </div>
+                                <%end%>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<center>
+<h1>User Posts</h1>
+
+<hr  class="style2" style="width: 35rem;margin-bottom: 40px;">
+</center>
+
+<%if (@user.id === current_user.id) || (@user.id != current_user.id && @user.profile_type) || (@user.id != current_user.id && !@user.profile_type && current_user.following?(@user)) %>
+  <%= render 'partials/user_profile_posts'%>
+<%else%>
+  <%="You cannot see posts of this user since the account is " %><b><%= "Private !"%></b>
+  <br>
+  <br>
+<%end%>
+<br>
+<br>
+

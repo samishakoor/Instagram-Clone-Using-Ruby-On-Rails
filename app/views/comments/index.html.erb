@@ -1,0 +1,35 @@
+
+<div style="margin-top: 75px;">
+<h3>Add Comment</h3>
+
+<%= form_for([@post,@post.comments.build]) do |f|%>
+<% if @post.comments.build.errors.any?%>
+    <%@post.comments.build.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger"><%= msg %></div>
+    <%end%>
+<%end%>
+
+
+<div>
+  <%= f.text_field :post_id,type: "hidden"%>
+</div>
+<div>
+  <%= f.text_field :user_id,type: "hidden",value: current_user.id %>
+</div>
+
+
+<div class="form-group">
+<p>
+  <%= f.label :text %>
+  <br>
+  <%= f.text_area(:body,{:class => 'form-control'}) %>
+</p>
+</div>
+
+
+<p><%= f.submit({:class => 'btn btn-primary'}) %>
+  <%= link_to 'Back' , post_path(@post) ,method: 'get', :class => 'btn btn-danger'%>
+</p>
+<%end%>
+
+</div>

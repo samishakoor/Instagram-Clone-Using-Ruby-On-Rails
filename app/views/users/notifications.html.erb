@@ -1,0 +1,34 @@
+<br>
+<br>
+<br>
+<h1>Notifications</h1>
+<hr>
+
+<%if !current_user.follow_requests.empty?%>
+
+  <% current_user.follow_requests.each do |request| %>
+  <div class="alert alert-dark" role="alert">
+  <p><b>"<%= request.followerable.email %>"</b> wants to follow you ! </p>
+  <%= button_to "Accept", accept_path(request.followerable),:class => 'btn btn-success btn-sm' %>
+  <br>
+  <%= button_to "Decline", decline_path(request.followerable),:class => 'btn btn-danger btn-sm'%>
+  </div>
+  <% end %>
+
+<%else%>
+  <h4><small><%="No notifications yet !"%><small><h4>
+<%end%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

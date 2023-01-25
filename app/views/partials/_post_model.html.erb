@@ -1,0 +1,71 @@
+
+
+<%model=@posts.order('id DESC')%>
+
+<%model.each do |p|%>
+
+<div>
+  <center>
+<div class="card border-dark" style="width: 32rem;">
+
+  <div class="card-header text-white bg-dark mb-3">
+    <h3 class="card-title">
+      <%=p.title.capitalize()%>
+    </h3>
+  </div>
+
+
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+
+      <p class="card-text"><%=p.body%></p>
+
+      <%if p.images.empty?%>
+         <%= link_to '' , post_path(p.id) ,method: 'get' , class:"post-link"%>
+      <%else%>
+      <%= link_to '' , post_path(p.id) ,method: 'get' , class:"post-link2"%>
+
+      <p>
+      <% p.images.each do |image| %>
+        <%= image_tag(image, style: "max-width: 30% ; height: auto%; object-fit: contain;") %>
+      <% end %>
+      </p>
+
+      <%end%>
+
+<br>
+      <% if user_signed_in? %>
+      <% like = current_user.likes.find_by(post: p) %>
+         <% if like.nil? %>
+             <%= button_to "Like", likes_path, params: { like: { post_id: p.id }}, method: :post , class:"btn btn-outline-dark" %>
+         <% else %>
+             <%= button_to "Unlike", like_path(like), method: :delete ,class:"btn btn-outline-dark"%>
+         <% end %>
+         <p><small><%= p.likes.count %> Likes </small></p>
+      <% end %>
+
+
+
+      <footer class="blockquote-footer">
+        <p class="card-text">
+           <small class="text-muted"><b>Posted By : </b><%= p.user.username%></small><%=" ("%> <%= link_to p.user.email ,p.user, style:"z-index:" ,class:"link-dark"%><%=" )"%>
+        </p>
+      </footer>
+
+    </blockquote>
+  </div>
+</div>
+</div>
+</center>
+<br>
+
+
+<%end%>
+
+
+
+
+
+
+
+

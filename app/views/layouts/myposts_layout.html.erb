@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <%= render 'partials/layout_head'%>
+  <body>
+
+
+<nav class="navbar navbar-dark bg-dark fixed-top">
+  <div class="container-fluid" style="padding-top: 10px;">
+    <ul class="nav-link" >
+      <li><%= link_to "Home" , root_path, :class => 'navbar-brand' %></li>
+    </ul>
+    <ul class="nav-link" >
+      <li><b><%= link_to "INSTAGRAM" , root_path, :class => 'navbar-brand' %></b></li>
+    </ul>
+
+    <ul class="nav-link" >
+      <li class="nav-item">
+        <a class="nav-link" href="#"><%= link_to "Create Post" , new_post_path,:class => 'navbar-brand'%></a>
+      </li>
+
+</ul>
+
+
+  </div>
+</nav>
+
+<br>
+
+
+<div class="container">
+
+  <%= yield %>
+  <%= render 'partials/footer' %>
+</div>
+    <%= render 'partials/bootstraplink2' %>
+  </body>
+</html>

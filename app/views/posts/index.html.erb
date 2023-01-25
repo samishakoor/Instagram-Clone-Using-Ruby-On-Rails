@@ -1,0 +1,44 @@
+<% if user_signed_in? %><br><br><br>
+
+<!--
+  <div class="alert alert-dismissible alert-success">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>
+      <%= current_user.email %>
+    </strong> has been signed in successfully!
+  </div>
+-->
+
+<center>
+
+
+
+
+<center>
+
+
+  <h1>Posts Wall</h1>
+  <hr class="style2" style="width: 35rem;margin-bottom: 40px;">
+  <% if @posts.empty? %>
+    <h4>No Posts Yet !</h4>
+    <%else%>
+      <%= render 'partials/post_model'%>
+   <%end%>
+</center>
+  <% else %>
+<br><br><br><br>
+
+<div >
+<center>
+<h1 class="mt-5">Welcome to Instagram Clone</h1>
+<p class="lead">Please register or sign in to continue.</p>
+<%= link_to "Sign Up" , new_user_registration_path , :class => 'btn btn-success btn-lg' %>
+<%= link_to "Sign in" , new_user_session_path , :class => 'btn btn-secondary btn-lg' %>
+
+<br>
+
+</center>
+</div>
+
+ <% end %>
+</center>

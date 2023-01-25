@@ -1,0 +1,31 @@
+<br>
+<br>
+<br>
+
+<h1>Edit Story</h1>
+<%= form_for :story , url: stories_path do |f|%>
+<% if @story.errors.any?%>
+    <%@story.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger"><%= msg %></div>
+    <%end%>
+<%end%>
+
+<div>
+  <%= f.text_field :user_id, type: "hidden", value: current_user.id %>
+</div>
+
+<div class="form-group">
+  <p>
+    <%= f.label :text %>
+    <br>
+    <%= f.text_area(:body,{:class => 'form-control'}) %>
+  </p>
+</div>
+
+<p><%= f.file_field :image%></p>
+
+
+<p><%= f.submit({:class => 'btn btn-primary'}) %>
+<%= link_to 'Back' , story_path(@story) ,method: 'get', :class => 'btn btn-danger'%>
+</p>
+<%end%>

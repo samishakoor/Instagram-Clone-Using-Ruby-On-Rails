@@ -1,0 +1,28 @@
+<br>
+<br>
+<br>
+<h1>Edit Post</h1>
+<%= form_for :post , url: post_path(@post), method: 'patch'  do |f|%>
+
+<% if @post.errors.any?%>
+    <%@post.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger"><%= msg %></div>
+    <%end%>
+<%end%>
+<p>
+  <%= f.label :title %>
+  <br>
+  <%= f.text_field(:title,{:class => 'form-control'}) %>
+</p>
+
+<p>
+  <%= f.label :text %>
+  <br>
+  <%= f.text_area :body, size: "27x7", class: "form-control" %>
+</p>
+<p><%= f.file_field :images, multiple:true %></p>
+
+<p><%= f.submit({:class => 'btn btn-primary'}) %>
+<%= link_to 'Back' , post_path(@post) ,method: 'get', :class => 'btn btn-danger'%>
+</p>
+<%end%>

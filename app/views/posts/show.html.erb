@@ -1,0 +1,66 @@
+<br>
+<br>
+<br>
+<center>
+<div class="card border-dark" style="width: 35rem;">
+  <div class="card-header">
+    <p class="card-text"><small class="text-muted"><b>POSTED AT : </b> <%=@post.updated_at%></small></p>
+  </div>
+  <div class="card-body">
+    <h2 class="card-title"><%=@post.title.capitalize()%></h2>
+    <p class="card-text"><strong>Description: </strong> <%=@post.body%></p>
+
+    <% @post.images.each do |image| %>
+      <%= image_tag(image, style: "max-width: 40% ; height: auto%; object-fit: contain;") %>
+    <% end %>
+
+
+    <p> <%= @post.likes.count %> Likes </p>
+
+  </div>
+</div>
+
+<% if @post.user_id.to_i === current_user.id %>
+<br>
+<%= link_to 'Edit' , edit_post_path(@post) ,method: 'get', :class => 'btn btn-primary'%>
+<%= link_to 'Delete' , post_path(@post) ,method: 'delete' , data: {confirm: 'Are you sure?'}, :class => 'btn btn-danger'%>
+<%end%>
+<hr>
+</center>
+
+<h3>Comments</h3>
+<% if @post.comments.empty? %><br>
+  <h6>No Comments Yet !</h6>
+<%else%>
+  <% @post.comments.each do |comment|%>
+    <div class="well">
+      <p>
+        <div class="card border-dark mb-3" style="width: 25rem;">
+          <div class="card-header">
+             <%u_id=Comment.where(id: comment.id).pluck("user_id")%>
+             <%email=User.where(id: u_id).pluck("email")%>
+             <p class="card-text"><small class="text-muted"><b>COMMENTED BY : </b> <%=email.first%></small></p>
+          </div>
+          <div class="card-body">
+
+            <p class="card-text"><%=comment.body%></p>
+
+            <%pid=Comment.where(id: comment.id).pluck("post_id").first%>
+            <%uid=Post.where(id: pid).pluck("user_id").first%>
+            <%if uid.to_i === current_user.id %>
+              <%= button_to 'Delete' ,[comment.post,comment],:class => 'btn-danger' ,method: :delete , data: { confirm: 'Are to sure?'}%>
+            <%else%>
+                <% user_id=Comment.where(id: comment.id).pluck("user_id").first%>
+                <%if user_id === current_user.id %>
+                  <%= button_to 'Delete' ,[comment.post,comment],:class => 'btn-danger' ,method: :delete , data: { confirm: 'Are to sure?'}%>
+                <%end%>
+            <%end%>
+          </div>
+        </div>
+      </p>
+    </div>
+  <%end%>
+<%end%>
+
+
+

@@ -1,0 +1,72 @@
+
+<br><br><br>
+<center>
+
+  <head>
+    <%= stylesheet_link_tag 'stories' %>
+  </head>
+
+  <h1>Stories Wall</h1>
+  <hr class="style2" style="width: 40rem;">
+</center>
+
+
+
+
+<% if @stories.empty? %>
+<center><h4>No Stories Yet !</h4></center>
+<%else%>
+
+<div class="container" >
+  <div class="main-card" style="padding-top: 15px;padding-bottom: 25px;">
+    <div class="cards" style="border-top-width: 30‒;padding-top: 0px;">
+
+
+      <%s_model=@stories.order('id DESC')%>
+      <% s_model.each do |s| %>
+
+
+
+      <div class="card" style="margin-top: 20px;padding-bottom: 1px;">
+       <div class="content">
+
+        <%= link_to '' , story_path(s.id) ,method: 'get' , class:"story-link"%>
+
+        <div class="img">
+
+          <% if s.image.attached? %>
+            <%= image_tag(s.image, style: "max-width: 100% ; height: auto%; object-fit: contain;") %>
+          <%else%>
+            <p>
+            <%=s.body%>
+           </p>
+          <%end%>
+
+
+         </div>
+         <div class="details">
+          <% if s.image.attached? %>
+           <p>
+            <%=s.body%>
+           </p>
+           <%else%>
+           <div style="padding-top: 40px;">
+           </div>
+          <%end%>
+         </div>
+
+         <div class="media-icons">
+         </div>
+            <p style="margin-bottom: 10px ; margin-top: 0‒;padding-top: 5px;">
+             <small class="text-muted"><b>Posted By : </b><%= s.user.email%></small>
+            </p>
+       </div>
+      </div>
+
+
+    <%end%>
+
+    </div>
+  </div>
+</div>
+<%end%>

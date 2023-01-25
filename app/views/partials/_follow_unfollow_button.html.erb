@@ -1,0 +1,14 @@
+<br>
+
+
+<% if current_user.following?(@user) %>
+  <%= button_to "Unfollow" , unfollow_path(@user) , class:"btn btn-secondary btn-lg"%>
+  <% elsif current_user.sent_follow_request_to?(@user) %>
+      <%= button_to "Cancel follow request" , cancel_path(@user), class:"btn btn-secondary btn-lg"%>
+  <% else %>
+      <% if @user.id==current_user.id %>
+      <%else%>
+      <%= button_to "Follow" , follow_path(@user) ,class:"btn btn-secondary btn-lg"%>
+      <% end %>
+
+  <% end %>

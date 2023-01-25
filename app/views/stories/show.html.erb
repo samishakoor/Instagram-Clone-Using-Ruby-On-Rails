@@ -1,0 +1,67 @@
+<br><br><br>
+
+
+<div class="container2" >
+  <div class="main-card2" style="padding-top: 0px;padding-bottom: 0px;">
+    <div class="cards2" style="border-top-width: 30‒;padding-top: 0px;">
+
+
+
+      <div class="card2" style="margin-top: 12px;padding-bottom: 1px;padding-left: 175px;padding-top: 0px;">
+
+
+        <div class="content2">
+
+        <div class="img2">
+
+          <% if @story.image.attached? %>
+            <%= image_tag(@story.image, style: "max-width: 100% ; height: auto%; object-fit: contain;") %>
+          <%else%>
+            <p >
+            <%=@story.body%>
+           </p>
+          <%end%>
+
+
+         </div>
+         <div class="details2">
+          <% if @story.image.attached? %>
+           <p class="set" style="margin-top: 2‒;margin-top: 65px;margin-right: 0px;padding-right: 70px;">
+            <%=@story.body%>
+           </p>
+           <%else%>
+           <div style="padding-top: 40px;">
+           </div>
+          <%end%>
+         </div>
+
+         <div class="media-icons2">
+         </div>
+            <p style="margin-bottom: 10px ; margin-top: 0‒;padding-top: 5px;">
+             <small class="text-muted"><b>Posted By : </b><%= @story.user.username%></small>
+             <p>
+             <%=""%> <%= link_to @story.user.email ,@story.user, style:"z-index:" ,class:"link-dark"%><%=""%>
+             </p>
+            </p>
+       </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <br>
+<center>
+
+  <div style="padding-left: 140px;padding-bottom: 0px;margin-bottom: 15px;">
+  <% if @story.user_id.to_i === current_user.id %>
+  <%= link_to 'Edit' , edit_story_path(@story) ,method: 'get', :class => 'btn btn-primary'%>
+  <%= link_to 'Delete' , story_path(@story) ,method: 'delete' , data: {confirm: 'Are you sure?'}, :class => 'btn btn-danger'%>
+  <%end%>
+  </div>
+</center>
+
+
+
+</div>
+
